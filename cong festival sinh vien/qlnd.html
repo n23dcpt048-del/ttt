@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Portal - Tổ chức</title>
+  <link rel="stylesheet" href="qlnd.css" />
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EVENT PORTAL</h2>
+
+    <ul class="menu">
+      <li><a href="tke.html">Thống kê</a></li>
+      <li><a href="tochuc.html">Tổ chức</a></li>
+      <li><a href="qlsk.html">Quản lý sự kiện</a></li>
+      <li class="active"><a href="qlnd.html">Quản lý nội dung (UGC)</a></li>
+      <li><a href="mxh.html">Mạng xã hội</a></li>
+      <li><a href="seo.html">Cài đặt SEO</a></li>
+    </ul>
+
+    <div class="logout">
+      <div class="user-info">ABC<br><small>Admin</small></div><br>
+      <button class="logout-btn">Đăng xuất</button>
+    </div>
+  </div>
+
+    <div class="main">
+    <div class="header-container">
+      <div class="title-section">
+        <h1>Quản lý nội dung (UGC)</h1>
+        <div class="sub">Quản lý nội dung từ người dùng</div>
+      </div>
+    </div>
+
+    <div class="content-tabs">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="pending">Chờ duyệt <span class="badge">(3)</span></button>
+        <button class="tab-btn" data-tab="approved">Đã duyệt <span class="badge">(2)</span></button>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <!-- Tab Chờ duyệt -->
+      <div class="tab-content active" id="pending-content">
+        <div class="content-grid">
+          <!-- Bài viết 1 -->
+          <div class="content-card">
+            <div class="content-image">
+              <img src="picture/recapcsv.jpg" alt="Khoảnh khắc đẹp tại sự kiện">
+            </div>
+            <div class="content-info">
+              <h3>RECAP CSV 2025</h3>
+              <div class="author">Bởi Nguyễn Văn Dương</div>
+              <div class="timestamp">20:00:00 16/12/2025</div>
+              <div class="actions">
+                <button class="approve-btn">Duyệt</button>
+                <button class="reject-btn">Từ chối</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bài viết 2 -->
+          <div class="content-card">
+            <div class="content-image">
+              <img src="picture/recapitmc.jpg" alt="Khoảnh khắc đẹp tại sự kiện">
+            </div>
+            <div class="content-info">
+              <h3>RECAP HCMPTIT ICPC 2025 </h3>
+              <div class="author">Bởi Chu Văn Phong</div>
+              <div class="timestamp">21:34:54 9/12/2025</div>
+              <div class="actions">
+                <button class="approve-btn">Duyệt</button>
+                <button class="reject-btn">Từ chối</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bài viết 3 -->
+          <div class="content-card">
+            <div class="content-image">
+              <img src="picture/recapazone.jpg" alt="Khoảnh khắc đẹp tại sự kiện">
+            </div>
+            <div class="content-info">
+              <h3>RECAP ASTEES COLLECTION REVEAL 2025</h3>
+              <div class="author">Bởi Vương Sơn Hà</div>
+              <div class="timestamp">22:30:00 17/12/2025</div>
+              <div class="actions">
+                <button class="approve-btn">Duyệt</button>
+                <button class="reject-btn">Từ chối</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Đã duyệt -->
+      <div class="tab-content" id="approved-content">
+        <div class="content-grid">
+          <!-- Bài viết đã duyệt 1 -->
+          <div class="content-card approved">
+            <div class="content-image">
+              <img src="picture/recapcmc.jpg" alt="Khoảnh khắc đẹp tại sự kiện">
+              <div class="status-badge approved">Đã duyệt</div>
+            </div>
+            <div class="content-info">
+              <h3>RECAP CASTING THE ASTRO - THE INFINITY GEN</h3>
+              <div class="author">Bởi Dương Minh Thoại</div>
+              <div class="timestamp">20:34:54 5/12/2025</div>
+              <div class="actions">
+                <button class="archive-btn">Xóa</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bài viết đã duyệt 2 -->
+          <div class="content-card approved">
+            <div class="content-image">
+              <img src="picture/recaplcd.jpg" alt="Khoảnh khắc đẹp tại sự kiện">
+              <div class="status-badge approved">Đã duyệt</div>
+            </div>
+            <div class="content-info">
+              <h3>RECAP - HCM PTIT MULTIMEDIA 2025</h3>
+              <div class="author">Bởi Lê Nhất Duy </div>
+              <div class="timestamp">23:34:54 7/12/2025</div>
+              <div class="actions">
+                <button class="archive-btn">Xóa</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal xác nhận -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Xác nhận</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="modalMessage">Bạn có chắc chắn muốn duyệt nội dung này?</p>
+      </div>
+      <div class="modal-actions">
+        <button class="cancel-btn">Hủy</button>
+        <button class="confirm-btn">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+     // Tab functionality
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tabId = btn.getAttribute('data-tab');
+    
+    // Remove active class from all tabs and contents
+    tabBtns.forEach(b => b.classList.remove('active'));
+    tabContents.forEach(c => c.classList.remove('active'));
+    
+    // Add active class to current tab and content
+    btn.classList.add('active');
+    document.getElementById(`${tabId}-content`).classList.add('active');
+  });
+});
+
+// Modal functionality
+const modalOverlay = document.getElementById('modalOverlay');
+const closeBtn = document.querySelector('.close-btn');
+const cancelBtn = document.querySelector('.cancel-btn');
+let currentAction = null;
+let currentCard = null;
+
+// Approve buttons
+document.querySelectorAll('.approve-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    currentCard = this.closest('.content-card');
+    showModal('Bạn có chắc chắn muốn duyệt nội dung này?', 'approve');
+  });
+});
+
+// Reject buttons
+document.querySelectorAll('.reject-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    currentCard = this.closest('.content-card');
+    showModal('Bạn có chắc chắn muốn từ chối nội dung này?', 'reject');
+  });
+});
+
+// delete buttons
+document.querySelectorAll('.archive-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    currentCard = this.closest('.content-card');
+    showModal('Bạn có chắc chắn muốn xóa nội dung này?', 'archive');
+  });
+});
+
+function showModal(message, action) {
+  document.getElementById('modalMessage').textContent = message;
+  currentAction = action;
+  modalOverlay.classList.add('active');
+}
+
+function hideModal() {
+  modalOverlay.classList.remove('active');
+  currentAction = null;
+  currentCard = null;
+}
+
+closeBtn.addEventListener('click', hideModal);
+cancelBtn.addEventListener('click', hideModal);
+
+// Confirm button
+document.querySelector('.confirm-btn').addEventListener('click', function() {
+  if (currentAction && currentCard) {
+    switch (currentAction) {
+      case 'approve':
+        // Move card to approved section
+        currentCard.remove();
+        updateBadge('pending', -1);
+        updateBadge('approved', 1);
+        alert('Nội dung đã được duyệt!');
+        break;
+      case 'reject':
+        currentCard.remove();
+        updateBadge('pending', -1);
+        alert('Nội dung đã bị từ chối!');
+        break;
+      case 'archive':
+        currentCard.remove();
+        updateBadge('approved', -1);
+        alert('Nội dung đã được xóa!');
+        break;
+    }
+  }
+  hideModal();
+});
+
+// Update badge counts
+function updateBadge(tab, change) {
+  const badge = document.querySelector(`[data-tab="${tab}"] .badge`);
+  if (badge) {
+    let currentCount = parseInt(badge.textContent);
+    currentCount += change;
+    badge.textContent = currentCount;
+    
+    // Hide badge if count is 0
+    if (currentCount <= 0) {
+      badge.style.display = 'none';
+    } else {
+      badge.style.display = 'inline-block';
+    }
+  }
+}
+
+// Close modal when clicking outside
+modalOverlay.addEventListener('click', function(e) {
+  if (e.target === modalOverlay) {
+    hideModal();
+  }
+});
+
+  </script>
+</body>
+</html>

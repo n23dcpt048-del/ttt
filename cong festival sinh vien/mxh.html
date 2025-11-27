@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Portal - Tổ chức</title>
+  <link rel="stylesheet" href="mxh.css" />
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EVENT PORTAL</h2>
+
+    <ul class="menu">
+      <li><a href="tke.html">Thống kê</a></li>
+      <li><a href="tochuc.html">Tổ chức</a></li>
+      <li><a href="qlsk.html">Quản lý sự kiện</a></li>
+      <li><a href="qlnd.html">Quản lý nội dung (UGC)</a></li>
+      <li class="active"><a href="mxh.html">Mạng xã hội</a></li>
+      <li><a href="seo.html">Cài đặt SEO</a></li>
+    </ul>
+
+    <div class="logout">
+      <div class="user-info">ABC<br><small>Admin</small></div><br>
+      <button class="logout-btn">Đăng xuất</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="header-container">
+      <div class="title-section">
+        <h1>Social media</h1>
+        <div class="sub">Quản lý danh sách mạng xã hội</div>
+      </div>
+      <button class="add-org-btn" id="openModalBtn">+ Thêm mới</button>
+    </div>
+
+    <div class="cards">
+      <!-- CARD 1 -->
+      <div class="card">
+        <h3>Facebook</h3>
+        <a class="web" href="#">www.facebook.com/eventportal</a>
+        <div class="actions">
+          <button class="edit" data-org-id="2" data-org-name="Facebook" data-org-link="www.facebook.com/eventportal">Sửa</button>
+          <button class="delete">Xóa</button>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="card">
+        <h3>Tiktok</h3>
+        <a class="web" href="#">www.tiktok.com/eventportal</a>
+
+        <div class="actions">
+          <button class="edit" data-org-id="2" data-org-name="Tiktok" data-org-link="www.tiktok.com/eventportal">Sửa</button>
+          <button class="delete">Xóa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL TẠO mxh MỚI -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Thêm social media</h2>
+        <button class="close-btn" id="closeModalBtn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="createOrgForm">
+          <div class="form-group">
+            <label for="orgName">Tên</label>
+            <input type="text" id="orgName" placeholder=" " required>
+          </div>
+          
+          <div class="form-group">
+            <label for="orgEmail">Link</label>
+            <input type="email" id="orgEmail" placeholder=" " required>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" id="cancelBtn">Hủy</button>
+            <button type="submit" class="create-btn">Tạo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CHỈNH SỬA MXH -->
+  <div class="modal-overlay" id="editModalOverlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Sửa social media</h2>
+        <button class="close-btn" id="closeEditModalBtn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="editOrgForm">
+          <input type="hidden" id="editOrgId">
+          
+          <div class="form-group">
+            <label for="editOrgName">Tên</label>
+            <input type="text" id="editOrgName" placeholder=" " required>
+          </div>
+          
+          <div class="form-group">
+            <label for="editOrgEmail">Link</label>
+            <input type="text" id="editOrgLink" placeholder=" " required> 
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" id="cancelEditBtn">Hủy</button>
+            <button type="submit" class="update-btn">Cập nhật</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // modal tạo
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const createOrgForm = document.getElementById('createOrgForm');
+
+    // modal chỉnh sửa
+    const closeEditModalBtn = document.getElementById('closeEditModalBtn');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const editModalOverlay = document.getElementById('editModalOverlay');
+    const editOrgForm = document.getElementById('editOrgForm');
+    const editButtons = document.querySelectorAll('.edit');
+
+    // Mở modal tạo
+    openModalBtn.addEventListener('click', () => {
+      modalOverlay.classList.add('active');
+    });
+
+    // Đóng modal tạo
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      createOrgForm.reset();
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+
+    // Đóng modal tạo khi click bên ngoài 
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+
+    // Mở modal chỉnh sửa - ĐÃ SỬA LỖI
+    editButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const orgId = button.getAttribute('data-org-id');
+        const orgName = button.getAttribute('data-org-name');
+        const orgLink = button.getAttribute('data-org-link');
+        
+        console.log('Edit button clicked:', { orgId, orgName, orgLink }); // Debug
+        
+        // Điền dữ liệu vào form chỉnh sửa
+        document.getElementById('editOrgId').value = orgId;
+        document.getElementById('editOrgName').value = orgName;
+        document.getElementById('editOrgLink').value = orgLink;
+        
+        editModalOverlay.classList.add('active');
+      });
+    });
+
+    // Đóng modal chỉnh sửa
+    function closeEditModal() {
+      editModalOverlay.classList.remove('active');
+      editOrgForm.reset();
+    }
+
+    closeEditModalBtn.addEventListener('click', closeEditModal);
+    cancelEditBtn.addEventListener('click', closeEditModal);
+
+    // Đóng modal chỉnh sửa khi click bên ngoài
+    editModalOverlay.addEventListener('click', (e) => {
+      if (e.target === editModalOverlay) {
+        closeEditModal();
+      }
+    });
+
+    // Xử lý submit form tạo
+    createOrgForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Lấy dữ liệu form
+      const formData = {
+        name: document.getElementById('orgName').value,
+        link: document.getElementById('orgLink').value
+      };
+      
+      // Ở đây bạn có thể gửi dữ liệu lên server
+      console.log('Form data:', formData);
+      alert('Tạo social media thành công!');
+      
+      // Đóng modal và reset form
+      closeModal();
+    });
+
+    // Xử lý submit form chỉnh sửa
+    editOrgForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Lấy dữ liệu form
+      const formData = {
+        id: document.getElementById('editOrgId').value,
+        name: document.getElementById('editOrgName').value,
+        link: document.getElementById('editOrgLink').value
+      };
+      
+      // Ở đây bạn có thể gửi dữ liệu lên server
+      console.log('Form data (chỉnh sửa):', formData);
+      alert('Cập nhật social media thành công!');
+      
+      // Đóng modal và reset form
+      closeEditModal();
+    });
+
+    // Xử lý nút xóa
+    document.querySelectorAll('.delete').forEach(button => {
+      button.addEventListener('click', function() {
+        if (confirm('Bạn có chắc chắn muốn xóa social media này?')) {
+          // Xử lý xóa ở đây
+          const card = this.closest('.card');
+          card.remove();
+          alert('Đã xóa social media!');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+</body>
+</html>
